@@ -59,18 +59,21 @@ d3.csv("csv/year_cnt.csv").then(function (data) {
   const myColor = d3.scaleOrdinal().domain(categories).range(d3.schemeSet2);
 
   // Add X axis
-  const x = d3.scaleLinear().domain([106, 112]).range([0, width]);
+  const x = d3.scaleLinear().domain([107, 111]).range([0, width]);
   svg_linechart
     .append("g")
     .attr("transform", `translate(0, ${height - 100})`)
     .call(d3.axisBottom(x).ticks(5));
 
+  var cur_col = data.map((d) => d["松山區"]);
+  console.log(cur_col.slice(0, 5));
+
   // Add Y axis
   const y = d3
     .scaleLinear()
-    .domain([0, 130])
+    .domain([0, Math.max(...cur_col)]).nice()
     .range([height - 100, 0]);
-  svg_linechart.append("g").call(d3.axisLeft(y));
+  var yAxis = svg_linechart.append("g").call(d3.axisLeft(y));
 
   // Add X axis label:
   svg_linechart
@@ -82,8 +85,6 @@ d3.csv("csv/year_cnt.csv").then(function (data) {
     .style("font-size", "25px");
 
   // Initialize line with 松山區
-  var cur_col = data.map((d) => d["松山區"]);
-  console.log(cur_col.slice(0, 5));
   var line = [];
   for (var i = 0; i < 4; i++) {
     line[i] = svg_linechart
@@ -126,7 +127,11 @@ d3.csv("csv/year_cnt.csv").then(function (data) {
   function update_linechart(selectedDistrict) {
     // Create new data with the selection
     var new_col = data.map((d) => d[selectedDistrict]);
-    console.log(new_col.slice(0, 5));
+    console.log(cur_col.slice(0, 5));
+
+    // Update Y Axis
+    y.domain([0, Math.max(...new_col)]).nice();
+    yAxis.transition().duration(800).call(d3.axisLeft(y));
 
     for (var i = 0; i < 4; i++) {
       // Give these new data to update_linechart line
