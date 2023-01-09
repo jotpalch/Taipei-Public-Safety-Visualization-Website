@@ -31,7 +31,13 @@ body {
 }
 
 html {
-  zoom: 0.7;
+  zoom: 0.55;
+}
+
+@media (min-height: 1000px) {
+  html {
+    zoom: 0.7;
+  }
 }
 
 body {
@@ -143,9 +149,6 @@ path:hover {
   .masthead-brand {
     float: left;
   }
-  html {
-  zoom: 0.55;
-}
 }
 
 
