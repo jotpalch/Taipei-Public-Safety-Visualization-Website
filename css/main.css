@@ -138,9 +138,9 @@ button:focus {
   .masthead-brand {
     float: left;
   }
-  /* .nav-masthead {
-    float: right;
-  } */
+  html {
+  zoom: 0.55;
+}
 }
 
 
