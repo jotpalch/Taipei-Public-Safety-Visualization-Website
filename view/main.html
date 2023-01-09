@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://cdn.iconscout.com/icon/premium/png-256-thumb/taipei-5770372-4820942.png">
+
+    <title>Taipei Public Safety Visualization Website</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/cover/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet" >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+</head>
+
+<body class="text-center">
+
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+        <header class="masthead mb-auto">
+            <div class="inner">
+                <h2 class="masthead-brand">Taipei Public Safety Visualization Website</h2>
+            </div>
+        </header>
+
+        <div class="selectbox selecttab">
+            <ul class="nav" id="pills-tab" role="tablist">
+                <li class="nav-item nav-masthead" role="presentation">
+                    <button class="nav-link active" id="pills-home-tab" data-toggle="pill" data-target="#home" type="button"
+                        role="tab" aria-controls="home" aria-selected="true">
+                        <i class="fa fa-home fa-3x"></i>
+                    </button>
+                </li>
+                <li class="nav-item nav-masthead" role="presentation">
+                    <button class="nav-link" id="pills-barplot-tab" data-toggle="pill" data-target="#barplot" type="button"
+                        role="tab" aria-controls="barplot" aria-selected="true">
+                        <i class="fa fa-signal fa-3x"></i>
+                    </button>
+                </li>
+                <li class="nav-item nav-masthead" role="presentation">
+                    <button class="nav-link" id="pills-profile-tab" data-toggle="pill" data-target="#barplot_hour" type="button"
+                        role="tab" aria-controls="barplot_hour" aria-selected="false">
+                        <i class="fa fa-bar-chart fa-3x"></i>
+                    </button>
+                </li>
+                <li class="nav-item nav-masthead" role="presentation">
+                    <button class="nav-link" id="pills-contact-tab" data-toggle="pill" data-target="#linechart" type="button"
+                        role="tab" aria-controls="linechart" aria-selected="false">
+                        <i class="fa fa-line-chart fa-3x"></i>
+                    </button>
+                </li>
+                <li class="nav-item nav-masthead" role="presentation">
+                    <button class="nav-link" id="pills-contact-tab" data-toggle="pill" data-target="#map" type="button"
+                        role="tab" aria-controls="map" aria-selected="false">
+                        <i class="fa fa fa-map fa-3x"></i>
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        <main role="main" class="inner cover">
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel">
+                    <h1 class="cover-heading">台北市犯罪資料視覺化網站</h1>
+                    <p class="lead" style="margin: 1.8rem 0; font-size: 1.3rem;">
+                        &nbsp;&nbsp;&nbsp;In this project, we want to visualize the relationship between the number of population, police stations, street
+                        lights,street monitors, and the number of burglaries that happen in each district in Taipei city.
+                        <br>
+                        We expect to create a heatmap with several graphs (such as barplots, line charts) besides the map to further explore the relationships. 
+                        <br>
+                        The heatmap is based on the ratio between the number of crimes and the number of population, police stations, street lights, street
+                        monitors…, etc.
+                        <br>
+                        We will possibly add more datasets as we will keep searching for more useful ones.
+                    </p>
+                    <p class="lead">
+                        <a href="#" onclick="explore();" class="btn btn-lg btn-secondary" id="explore">
+                            Explore it &nbsp;<i class="fa fa-arrow-right"></i>
+                        </a>
+                    </p>
+                </div>
+                <div class="tab-pane fade" id="barplot" role="tabpanel">
+                    <div class="selectbox">
+                        <select class="custom-select" id="select_year" aria-label="Default select example"></select>
+                        <select class="custom-select" id="select_cat" aria-label="Default select example"></select>
+                    </div>
+                    <div id="my_dataviz"></div>
+                </div>
+                <div class="tab-pane fade" id="barplot_hour" role="tabpanel">
+                    <div class="selectbox">
+                        <select class="custom-select" id="select_district" aria-label="Default select example"></select>
+                        <select class="custom-select" id="select_cat_barplot_hour" aria-label="Default select example"></select>
+                    </div>
+                    <div id="my_dataviz_barplot_hour"></div>
+                </div>
+                <div class="tab-pane fade" id="linechart" role="tabpanel">
+                    <div class="selectbox">
+                        <select class="custom-select" id="select_district_linechart" aria-label="Default select example"></select>
+                    </div>                    
+                    <div id="my_dataviz_linechart"></div>
+                </div>
+                <div class="tab-pane fade" id="map" role="tabpanel">
+                    <div class="selectbox">
+                        <select class="custom-select" id="select_cat_map" aria-label="Default select example"></select>
+                    </div>
+                    <div id="my_dataviz_map"></div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="mastfoot mt-auto">
+            <div class="inner">
+                <p>Data from <a href="https://data.taipei/">臺北市資料大平臺</a>, and made by <a href="#">@WWJ</a>, <a href="#">@BotingChen</a>, <a href="#">@Jotpac</a>.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/barplot.js"></script>
+    <script src="js/barplot_hour.js"></script>
+    <script src="js/linechart.js"></script>
+    <script src="js/map.js"></script>
+
+    <script>
+        const explore = () => {
+            document.querySelector('#pills-barplot-tab').click();
+        }
+    </script>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js"></script>
+    <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>
