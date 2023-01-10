@@ -23,6 +23,7 @@
 
 	const districts = ["松山區", "信義區", "大安區", "中山區", "中正區", "大同區", "萬華區", "文山區", "南港區", "內湖區", "士林區", "北投區"];
 	const color = ["#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5","#ffed6f"];
+	const updateTimeInterval = 500;
 
 	const svg = d3.select("#barchart_race")
 		.append("svg")
@@ -116,7 +117,7 @@
 	// Make the graph updates automatically
 	var inter = setInterval(function() {
 		update();
-	}, 500);
+	}, updateTimeInterval);
 
 	function update() {
 		var pre_time = cur_time;
@@ -157,7 +158,7 @@
 				.attr("fill", (d, i) => colorScale(i))
 				.transition()
 				.ease(d3.easeLinear)
-				.duration(800)
+				.duration(updateTimeInterval)
 					.attr("y", (d, i) => yScale(districts[i]))
 					//.attr("y", (d, i) => yScale(districts[sorted_indices[i]]))
 					.attr("width", d => xScale(d) - xScale(0));
@@ -174,7 +175,7 @@
 				.text(d => +d)
 				.transition()
 				.ease(d3.easeLinear)
-				.duration(800)
+				.duration(updateTimeInterval)
 					.attr("x", d => xScale(d) - 6)
 					.attr("y", (d,i) => yScale(districts[i]) + yScale.bandwidth() / 2)
 					// Add bar value 1 by 1
@@ -197,7 +198,7 @@
 		if (inter) { clearInterval(inter); }
 		inter = setInterval(function() {
 			update();
-		}, 1000);
+		}, updateTimeInterval);
 	}
 
 	// Stop barchart race
