@@ -163,6 +163,7 @@
 					//.attr("y", (d, i) => yScale(districts[sorted_indices[i]]))
 					.attr("width", d => xScale(d) - xScale(0));
 
+			console.log(new_data);
 			// Change bar value display position
 			d3
 				.selectAll("text.barValue")
@@ -180,7 +181,7 @@
 					.attr("y", (d,i) => yScale(districts[i]) + yScale.bandwidth() / 2)
 					// Add bar value 1 by 1
 					.tween("text", function(d,i) {
-						let ii = d3.interpolateRound(pre_data[sorted_indices[i]] || d, d);
+						let ii = d3.interpolateRound(pre_data[i] || d, d);
 						return function(t) {
 							this.textContent = d3.format(",")(ii(t));
 						};
