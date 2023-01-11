@@ -1,19 +1,19 @@
-// const margin = { top: 10, right: 10, bottom: 30, left: 30 },
-//   width = 800 - margin.left - margin.right,
-//   height = 500 - margin.top - margin.bottom;
+const margin_linechart = { top: 10, right: 10, bottom: -30, left: 30 },
+  width_linechart = 800 - margin_linechart.left - margin_linechart.right,
+  height_linechart = 500 - margin_linechart.top - margin_linechart.bottom;
 
 // const margin = { top: 30, right: 30, bottom: 70, left: 60 },
-//   width = 800 - margin.left - margin.right,
+//   width_linechart = 800 - margin.left - margin.right,
 //   height = 500 - margin.top - margin.bottom;
 
 // Append the svg_linechart object to the body of the page
 const svg_linechart = d3
   .select("#my_dataviz_linechart")
   .append("svg")
-  .attr("width", width + margin.left + margin.right)
-  .attr("height", height + margin.top + margin.bottom)
+  .attr("width", width_linechart + margin_linechart.left + margin_linechart.right)
+  .attr("height", height_linechart + margin_linechart.top + margin_linechart.bottom)
   .append("g")
-  .attr("transform", `translate(${margin.left},${margin.top})`);
+  .attr("transform", `translate(${margin_linechart.left},${margin_linechart.top})`);
 
 //Read the data
 d3.csv("csv/year_cnt.csv").then(function (data) {
@@ -59,10 +59,10 @@ d3.csv("csv/year_cnt.csv").then(function (data) {
   const myColor = d3.scaleOrdinal().domain(categories).range(d3.schemeSet2);
 
   // Add X axis
-  const x = d3.scaleLinear().domain([107, 111]).range([0, width]);
+  const x = d3.scaleLinear().domain([107, 111]).range([0, width_linechart]);
   svg_linechart
     .append("g")
-    .attr("transform", `translate(0, ${height - 100})`)
+    .attr("transform", `translate(0, ${height_linechart - 100})`)
     .call(d3.axisBottom(x).ticks(5));
 
   var cur_col = data.map((d) => d["松山區"]);
@@ -72,15 +72,15 @@ d3.csv("csv/year_cnt.csv").then(function (data) {
   const y = d3
     .scaleLinear()
     .domain([0, Math.max(...cur_col)]).nice()
-    .range([height - 100, 0]);
+    .range([height_linechart - 100, 0]);
   var yAxis = svg_linechart.append("g").call(d3.axisLeft(y));
 
   // Add X axis label:
   svg_linechart
     .append("text")
     .attr("text-anchor", "end")
-    .attr("x", width / 2 + margin.left - 38)
-    .attr("y", height + margin.top - 55)
+    .attr("x", width_linechart / 2 + margin_linechart.left - 10)
+    .attr("y", height_linechart + margin_linechart.top - 50)
     .text("Year")
     .style("font-size", "25px");
 
