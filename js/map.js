@@ -127,9 +127,9 @@ d3.json("csv/taipei2.json").then(function (geojson) {
       legend_rect[i] = svg
         .append("rect")
         .attr("x", 690)
-        .attr("y", 60 + 20 * i)
-        .attr("width", 10)
-        .attr("height", 10)
+        .attr("y", 57 + 20 * i)
+        .attr("width", 15)
+        .attr("height", 15)
         .attr("stroke", "black")
         .attr("stroke-width", 1)
         .style("fill", d3.schemeBlues[8][i]);

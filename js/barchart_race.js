@@ -111,6 +111,7 @@ d3.csv("csv/race_data.csv").then(function (raw_data) {
     .attr("class", "barValue")
     .attr("dy", "20")
     .style("text-anchor", "end")
+    .style("font-size", "25px")
     .style("dominant-baseline", "middle")
     .text((d) => +d)
     .attr("x", (d) => xScale(d) - 6)
