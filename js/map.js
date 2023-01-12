@@ -19,7 +19,7 @@ var colorScale;
 // Set bins for all categories
 const bins = [
   [850, 1000, 1150, 1300, 1450, 1600, 1750],
-  [9, 11, 13, 15, 17, 19, 21],
+  [5, 7, 9, 11, 13, 15, 17],
   [60, 80, 100, 120, 140, 160, 180],
   [10, 16, 22, 28, 34, 40, 46],
   [50, 100, 150, 200, 250, 300, 350],
@@ -111,14 +111,14 @@ d3.json("csv/taipei2.json").then(function (geojson) {
             d3.selectAll('title').remove();
       });
     //.on("click", showCharts(d, data));
-    
+
                 // .on("mouseover", function(d) {
                 //     d3.select(this).attr("fill", color1);
                 // })
                 // .on("mouseleave", function(d) {
                 //     d3.select(this).attr("fill", color2);
                 // });
-                
+
 
     // Handmade legend for the heatmap
     var legend_rect = [],
