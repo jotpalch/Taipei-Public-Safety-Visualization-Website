@@ -138,7 +138,7 @@ d3.json("csv/taipei2.json").then(function (geojson) {
         .attr("x", 710)
         .attr("y", 65 + 20 * i)
         .text(ranges[0][i])
-        .style("font-size", "15px")
+        .style("font-size", "20px")
         .attr("alignment-baseline", "middle");
     }
 

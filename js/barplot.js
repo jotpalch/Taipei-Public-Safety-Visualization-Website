@@ -1,7 +1,7 @@
 // set the dimensions and margins of the graph
-const margin = { top: 30, right: 30, bottom: 70, left: 60 },
-  width = 800 - margin.left - margin.right,
-  height = 500 - margin.top - margin.bottom;
+const margin = { top: 30, right: 30, bottom: 100, left: 60 },
+  width = 1000 - margin.left - margin.right,
+  height = 600 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 const svg = d3
@@ -14,20 +14,20 @@ const svg = d3
 
 // Initialize the X axis
 const x = d3.scaleBand().range([0, width]).padding(0.2);
-const xAxis = svg.append("g").attr("transform", `translate(0,${height})`);
+const xAxis = svg.append("g").style("font", "20px times").attr("transform", `translate(0,${height})`);
 
 // Initialize the Y axis
 const y = d3.scaleLinear().range([height, 0]);
-const yAxis = svg.append("g").attr("class", "myYaxis");
+const yAxis = svg.append("g").style("font", "20px times").attr("class", "myYaxis");
 
 // Add X axis label:
 svg
   .append("text")
   .attr("text-anchor", "end")
   .attr("x", width / 2 + margin.left)
-  .attr("y", height + margin.top + 30)
+  .attr("y", height + margin.top + 40)
   .text("臺北市行政區")
-  .style("font-size", "25px");
+  .style("font-size", "30px");
 
 const year = ["107", "108", "109", "110", "111"];
 const cat = ["house", "car", "motor", "bike"];

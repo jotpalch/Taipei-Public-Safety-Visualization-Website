@@ -1,6 +1,6 @@
-const margin_linechart = { top: 10, right: 10, bottom: -30, left: 30 },
-  width_linechart = 800 - margin_linechart.left - margin_linechart.right,
-  height_linechart = 500 - margin_linechart.top - margin_linechart.bottom;
+const margin_linechart = { top: 10, right: 10, bottom: 30, left: 30 },
+  width_linechart = 1000 - margin_linechart.left - margin_linechart.right,
+  height_linechart = 600 - margin_linechart.top - margin_linechart.bottom;
 
 // const margin = { top: 30, right: 30, bottom: 70, left: 60 },
 //   width_linechart = 800 - margin.left - margin.right,
@@ -62,6 +62,7 @@ d3.csv("csv/year_cnt.csv").then(function (data) {
   const x = d3.scaleLinear().domain([107, 111]).range([0, width_linechart]);
   svg_linechart
     .append("g")
+    .style("font", "20px times")
     .attr("transform", `translate(0, ${height_linechart - 100})`)
     .call(d3.axisBottom(x).ticks(5));
 
@@ -73,16 +74,16 @@ d3.csv("csv/year_cnt.csv").then(function (data) {
     .scaleLinear()
     .domain([0, Math.max(...cur_col)]).nice()
     .range([height_linechart - 100, 0]);
-  var yAxis = svg_linechart.append("g").call(d3.axisLeft(y));
+  var yAxis = svg_linechart.append("g").style("font", "20px times").call(d3.axisLeft(y));
 
   // Add X axis label:
   svg_linechart
     .append("text")
     .attr("text-anchor", "end")
     .attr("x", width_linechart / 2 + margin_linechart.left - 10)
-    .attr("y", height_linechart + margin_linechart.top - 50)
+    .attr("y", height_linechart + margin_linechart.top - 30)
     .text("Year")
-    .style("font-size", "25px");
+    .style("font-size", "40px");
 
   // Initialize line with 松山區
   var line = [];
@@ -109,17 +110,17 @@ d3.csv("csv/year_cnt.csv").then(function (data) {
     // Handmade legend
     svg_linechart
       .append("rect")
-      .attr("x", 580)
-      .attr("y", 10 + 20 * i)
+      .attr("x", 780)
+      .attr("y", 10 + 30 * i)
       .attr("width", 15)
       .attr("height", 10)
-      .style("fill", myColor(categories[i]));
+      .style("fill", myColor(categories[i]))
     svg_linechart
       .append("text")
-      .attr("x", 600)
-      .attr("y", 15 + 20 * i)
+      .attr("x", 800)
+      .attr("y", 15 + 30 * i)
       .text(categories[i])
-      .style("font-size", "15px")
+      .style("font-size", "20px")
       .attr("alignment-baseline", "middle");
   }
 
