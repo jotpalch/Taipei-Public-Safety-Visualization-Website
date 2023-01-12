@@ -83,7 +83,7 @@ d3.csv("csv/year_cnt.csv").then(function (data) {
 
   // Initialize line with 松山區
   var cur_col = data.map((d) => d["松山區"]);
-  console.log(cur_col.slice(0, 5));
+  // console.log(cur_col.slice(0, 5));
   var line = [];
   for (var i = 0; i < 4; i++) {
     line[i] = svg_linechart

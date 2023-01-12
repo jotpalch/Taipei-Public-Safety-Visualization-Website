@@ -91,7 +91,7 @@ svg_barplot_hour
   .text("Time Period")
   .style("font-size", "25px");
 
-// A function that create / update_barplot_hour the plot for a given constiable:
+// A function that create / update_barplot_hour the plot for a given constiable:path
 function update_barplot_hour(sel_dis, sel_cat) {
   // Parse the Data
   d3.csv(csv_cat[categories.indexOf(sel_cat)]).then(function (data) {
@@ -117,6 +117,14 @@ function update_barplot_hour(sel_dis, sel_cat) {
       .attr("width", x_barplot_hour.bandwidth())
       .attr("height", (d) => height_barplot_hour - y_barplot_hour(d.cnt))
       .attr("fill", "#69b3a2");
+      svg_barplot_hour.selectAll("rect").on('mouseover', function (d) {
+        d3.select(this).attr('opacity', 0.3).append('title')
+        .text(function (d) { return 'Time : ' + d.time + '\nQuantity : ' + d.cnt});
+      })
+      .on('mouseout', function (d) {
+            d3.selectAll('title').remove()
+            d3.select(this).attr('opacity', 1);
+      });
   });
 }
 

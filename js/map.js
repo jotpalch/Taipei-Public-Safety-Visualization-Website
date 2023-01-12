@@ -101,20 +101,24 @@ d3.json("csv/taipei2.json").then(function (geojson) {
       .attr("fill", function (d) {
         console.log(data[0][d.properties.T_Name]);
         return colorScale(data[0][d.properties.T_Name]);
+      });
+      // .append("title");
+      svg.selectAll("path").on('mouseover', function (d) {
+        d3.select(this).append('title')
+        .text(function (d) { return 'District : ' + d.properties.T_Name + '\nQuantity : ' + data[0][d.properties.T_Name]});
       })
-      .append("title")
-      .text(function (d) {
-        return d.properties.T_Name;
+      .on('mouseout', function (d) {
+            d3.selectAll('title').remove();
       });
     //.on("click", showCharts(d, data));
-    /*
-                .on("mouseover", function(d) {
-                    d3.select(this).attr("fill", color1);
-                })
-                .on("mouseleave", function(d) {
-                    d3.select(this).attr("fill", color2);
-                })
-                */
+    
+                // .on("mouseover", function(d) {
+                //     d3.select(this).attr("fill", color1);
+                // })
+                // .on("mouseleave", function(d) {
+                //     d3.select(this).attr("fill", color2);
+                // });
+                
 
     // Handmade legend for the heatmap
     var legend_rect = [],
@@ -154,7 +158,13 @@ d3.json("csv/taipei2.json").then(function (geojson) {
         .attr("fill", function (d) {
           return colorScale(data[idx][d.properties.T_Name]);
         });
-
+        svg.selectAll("path").on('mouseover', function (d) {
+          d3.select(this).append('title')
+          .text(function (d) { return 'District : ' + d.properties.T_Name + '\nQuantity : ' + data[idx][d.properties.T_Name]});
+        })
+        .on('mouseout', function (d) {
+              d3.selectAll('title').remove();
+        });
       // Update the legend texts
       for (var i = 0; i < legend_text.length; i++) {
         legend_text[i].transition().duration(800).text(ranges[idx][i]);

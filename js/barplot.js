@@ -72,7 +72,6 @@ d3.select("#select_cat")
   }); // corresponding value returned by the button
 // A function that create / update the plot for a given constiable:
 function update(selectedconst) {
-  // console.log(selectedconst);
   // Parse the Data
   d3.csv("csv/divbydis.csv").then(function (data) {
     // X axis
@@ -94,6 +93,14 @@ function update(selectedconst) {
       .attr("width", x.bandwidth())
       .attr("height", (d) => height - y(d[selectedconst]))
       .attr("fill", "#69b3a2");
+    svg.selectAll("rect").on('mouseover', function (d) {
+        d3.select(this).attr('opacity', 0.3).append('title')
+        .text(function (d) { return 'District : ' + d.district + '\nQuantity : ' + d[selectedconst]});
+      })
+      .on('mouseout', function (d) {
+            d3.selectAll('title').remove()
+            d3.select(this).attr('opacity', 1);
+      });
   });
 }
 
