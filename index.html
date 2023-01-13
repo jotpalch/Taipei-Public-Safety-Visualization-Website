@@ -76,14 +76,13 @@
         <main role="main" class="inner cover">
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel">
-                    <h1 class="cover-heading">台北市犯罪資料視覺化網站</h1>
-                    <p class="lead" style="margin: 1.8rem 0; font-size: 1.3rem;">
-                        &nbsp;&nbsp;&nbsp;In this project, we want to visualize the relationship between the number of population, police stations, street
-                        lights,street monitors, and the number of burglaries that happen in each district in Taipei city.
+                    <h1 class="cover-heading">Taipei Burglary Data Visualization Website</h1>
+                    <p class="lead" style="margin: 1.8rem 0; font-size: 1.5rem;">
+                        &nbsp;&nbsp;&nbsp;In this project, we want to visualize the relationship between the number of population, police stations, street monitors, and the number of burglaries that happen in each district in Taipei city.
                         <br>
                         We expect to create a heatmap with several graphs (such as barplots, line charts) besides the map to further explore the relationships. 
                         <br>
-                        The heatmap is based on the ratio between the number of crimes and the number of population, police stations, street lights, street
+                        The heatmap is based on the number of crimes and the number of population, police stations, street lights, street
                         monitors…, etc.
                         <br>
                         We will possibly add more datasets as we will keep searching for more useful ones.
@@ -95,7 +94,7 @@
                     </p>
                 </div>
                 <div class="tab-pane fade" id="barplot" role="tabpanel">
-                    <h3>Total annual of different burglaries by district</h3>
+                    <h3>Annual number of different burglaries by district</h3>
                     <div class="selectbox">
                         <select class="custom-select" id="select_year" aria-label="Default select example"></select>
                         <select class="custom-select" id="select_cat" aria-label="Default select example"></select>
@@ -103,7 +102,7 @@
                     <div id="my_dataviz"></div>
                 </div>
                 <div class="tab-pane fade" id="barplot_hour" role="tabpanel">
-                    <h3>Change of the total of different burglaries within a day</h3>
+                    <h3>Total of burglaries in different time slots in a day.</h3>
                     <div class="selectbox">
                         <select class="custom-select" id="select_district" aria-label="Default select example"></select>
                         <select class="custom-select" id="select_cat_barplot_hour" aria-label="Default select example"></select>
@@ -111,7 +110,7 @@
                     <div id="my_dataviz_barplot_hour"></div>
                 </div>
                 <div class="tab-pane fade" id="linechart" role="tabpanel">
-                    <h3>Change of the number of different burglary by year</h3>
+                    <h3>Change of the number of different burglaries by year</h3>
                     <div class="selectbox">
                         <select class="custom-select" id="select_district_linechart" aria-label="Default select example"></select>
                     </div>                    

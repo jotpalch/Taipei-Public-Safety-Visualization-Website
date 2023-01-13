@@ -73,7 +73,7 @@ d3.csv("csv/race_data.csv").then(function (raw_data) {
     .append("g")
     .call(d3.axisTop(xScale))
     .attr("transform", `translate(0, ${margin_barchart_race.top})`)
-    .style("font-size", `15px`);
+    .style("font-size", `20px`);
 
   // Add Y axis
   yScale = d3
@@ -85,7 +85,7 @@ d3.csv("csv/race_data.csv").then(function (raw_data) {
     .append("g")
     .call(d3.axisLeft(yScale))
     .attr("transform", `translate(-2, ${margin_barchart_race.top})`)
-    .style("font-size", `15px`);
+    .style("font-size", `20px`);
 
   // Color Scale
   colorScale_barchart_race = d3.scaleOrdinal(d3.schemeTableau10).domain(districts);
@@ -111,6 +111,7 @@ d3.csv("csv/race_data.csv").then(function (raw_data) {
     .attr("class", "barValue")
     .attr("dy", "20")
     .style("text-anchor", "end")
+    .style("font-size", "25px")
     .style("dominant-baseline", "middle")
     .text((d) => +d)
     .attr("x", (d) => xScale(d) - 6)

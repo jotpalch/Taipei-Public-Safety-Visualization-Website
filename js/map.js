@@ -19,7 +19,7 @@ var colorScale;
 // Set bins for all categories
 const bins = [
   [850, 1000, 1150, 1300, 1450, 1600, 1750],
-  [9, 11, 13, 15, 17, 19, 21],
+  [5, 7, 9, 11, 13, 15, 17],
   [60, 80, 100, 120, 140, 160, 180],
   [10, 16, 22, 28, 34, 40, 46],
   [50, 100, 150, 200, 250, 300, 350],
@@ -101,20 +101,24 @@ d3.json("csv/taipei2.json").then(function (geojson) {
       .attr("fill", function (d) {
         console.log(data[0][d.properties.T_Name]);
         return colorScale(data[0][d.properties.T_Name]);
+      });
+      // .append("title");
+      svg.selectAll("path").on('mouseover', function (d) {
+        d3.select(this).append('title')
+        .text(function (d) { return 'District : ' + d.properties.T_Name + '\nQuantity : ' + data[0][d.properties.T_Name]});
       })
-      .append("title")
-      .text(function (d) {
-        return d.properties.T_Name;
+      .on('mouseout', function (d) {
+            d3.selectAll('title').remove();
       });
     //.on("click", showCharts(d, data));
-    /*
-                .on("mouseover", function(d) {
-                    d3.select(this).attr("fill", color1);
-                })
-                .on("mouseleave", function(d) {
-                    d3.select(this).attr("fill", color2);
-                })
-                */
+
+                // .on("mouseover", function(d) {
+                //     d3.select(this).attr("fill", color1);
+                // })
+                // .on("mouseleave", function(d) {
+                //     d3.select(this).attr("fill", color2);
+                // });
+
 
     // Handmade legend for the heatmap
     var legend_rect = [],
@@ -123,9 +127,9 @@ d3.json("csv/taipei2.json").then(function (geojson) {
       legend_rect[i] = svg
         .append("rect")
         .attr("x", 690)
-        .attr("y", 60 + 20 * i)
-        .attr("width", 10)
-        .attr("height", 10)
+        .attr("y", 57 + 20 * i)
+        .attr("width", 15)
+        .attr("height", 15)
         .attr("stroke", "black")
         .attr("stroke-width", 1)
         .style("fill", d3.schemeBlues[8][i]);
@@ -134,7 +138,7 @@ d3.json("csv/taipei2.json").then(function (geojson) {
         .attr("x", 710)
         .attr("y", 65 + 20 * i)
         .text(ranges[0][i])
-        .style("font-size", "15px")
+        .style("font-size", "20px")
         .attr("alignment-baseline", "middle");
     }
 
@@ -154,7 +158,13 @@ d3.json("csv/taipei2.json").then(function (geojson) {
         .attr("fill", function (d) {
           return colorScale(data[idx][d.properties.T_Name]);
         });
-
+        svg.selectAll("path").on('mouseover', function (d) {
+          d3.select(this).append('title')
+          .text(function (d) { return 'District : ' + d.properties.T_Name + '\nQuantity : ' + data[idx][d.properties.T_Name]});
+        })
+        .on('mouseout', function (d) {
+              d3.selectAll('title').remove();
+        });
       // Update the legend texts
       for (var i = 0; i < legend_text.length; i++) {
         legend_text[i].transition().duration(800).text(ranges[idx][i]);

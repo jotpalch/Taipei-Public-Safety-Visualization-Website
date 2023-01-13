@@ -79,11 +79,11 @@ d3.csv("csv/year_cnt.csv").then(function (data) {
     .attr("x", width / 2 + margin.left - 38)
     .attr("y", height + margin.top - 55)
     .text("Year")
-    .style("font-size", "25px");
+    .style("font-size", "30px");
 
   // Initialize line with 松山區
   var cur_col = data.map((d) => d["松山區"]);
-  console.log(cur_col.slice(0, 5));
+  // console.log(cur_col.slice(0, 5));
   var line = [];
   for (var i = 0; i < 4; i++) {
     line[i] = svg_linechart
@@ -120,6 +120,13 @@ d3.csv("csv/year_cnt.csv").then(function (data) {
       .text(categories[i])
       .style("font-size", "15px")
       .attr("alignment-baseline", "middle");
+    svg_linechart.selectAll('rect').on('mouseover', function (d) {
+        d3.select(this).append('title')
+        .text(function (d) { return 'Time : '});
+      })
+      .on('mouseout', function (d) {
+            d3.selectAll('title').remove()
+      });
   }
 
   // A function that update_linechart the chart
@@ -146,6 +153,13 @@ d3.csv("csv/year_cnt.csv").then(function (data) {
             })
         )
         .attr("stroke", myColor(categories[i]));
+        svg_linechart.on('mouseover', function (d) {
+          d3.select(this).append('title')
+          .text(function (d) { return 'Time : '});
+        })
+        .on('mouseout', function (d) {
+              d3.selectAll('title').remove()
+        });
     }
   }
 

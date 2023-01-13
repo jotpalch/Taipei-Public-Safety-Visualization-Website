@@ -1,8 +1,8 @@
-const margin_barplot_hour = { top: 30, right: 30, bottom: 70, left: 60 },
+const margin_barplot_hour = { top: 30, right: 30, bottom: 100, left: 60 },
   width_barplot_hour =
-    800 - margin_barplot_hour.left - margin_barplot_hour.right,
+    1000 - margin_barplot_hour.left - margin_barplot_hour.right,
   height_barplot_hour =
-    500 - margin_barplot_hour.top - margin_barplot_hour.bottom;
+    600 - margin_barplot_hour.top - margin_barplot_hour.bottom;
 
 // Append the svg_barplot_hour object to the body of the page
 const svg_barplot_hour = d3
@@ -76,22 +76,22 @@ d3.select("#select_cat_barplot_hour")
 
 // Initialize the x_barplot_hour axis
 const x_barplot_hour = d3.scaleBand().range([0, width_barplot_hour]).padding(0.2);
-const xAxis_barplot_hour = svg_barplot_hour.append("g").attr("transform", `translate(0,${height_barplot_hour})`);
+const xAxis_barplot_hour = svg_barplot_hour.append("g").style("font", "20px times").attr("transform", `translate(0,${height_barplot_hour})`);
 
 // Initialize the y_barplot_hour axis
 const y_barplot_hour = d3.scaleLinear().range([height_barplot_hour, 0]);
-const yAxis_barplot_hour = svg_barplot_hour.append("g").attr("class", "myYaxis");
+const yAxis_barplot_hour = svg_barplot_hour.append("g").style("font", "20px times").attr("class", "myYaxis");
 
 // Add x_barplot_hour axis label:
 svg_barplot_hour
   .append("text")
   .attr("text-anchor", "end")
   .attr("x", width_barplot_hour / 2 + margin_barplot_hour.left)
-  .attr("y", height_barplot_hour + margin_barplot_hour.top + 25)
-  .text("Time Period")
-  .style("font-size", "25px");
+  .attr("y", height_barplot_hour + margin_barplot_hour.top + 40)
+  .text("Time Period (hour)")
+  .style("font-size", "30px");
 
-// A function that create / update_barplot_hour the plot for a given constiable:
+// A function that create / update_barplot_hour the plot for a given constiable:path
 function update_barplot_hour(sel_dis, sel_cat) {
   // Parse the Data
   d3.csv(csv_cat[categories.indexOf(sel_cat)]).then(function (data) {
@@ -117,6 +117,14 @@ function update_barplot_hour(sel_dis, sel_cat) {
       .attr("width", x_barplot_hour.bandwidth())
       .attr("height", (d) => height_barplot_hour - y_barplot_hour(d.cnt))
       .attr("fill", "#69b3a2");
+      svg_barplot_hour.selectAll("rect").on('mouseover', function (d) {
+        d3.select(this).attr('opacity', 0.3).append('title')
+        .text(function (d) { return 'Time : ' + d.time + '\nQuantity : ' + d.cnt});
+      })
+      .on('mouseout', function (d) {
+            d3.selectAll('title').remove()
+            d3.select(this).attr('opacity', 1);
+      });
   });
 }
 
